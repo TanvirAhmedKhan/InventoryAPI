@@ -18,6 +18,12 @@ namespace InventoryAPI
         {
             services.AddMvc();
             services.AddSingleton<IInvertoryServices, InventoryServices>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Car Inventory API", Description = "Swagger documentation for an asp.net core web api." });
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,6 +36,12 @@ namespace InventoryAPI
             
            
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Car Inventory API");
+            }
+            );
         }
     }
 }
