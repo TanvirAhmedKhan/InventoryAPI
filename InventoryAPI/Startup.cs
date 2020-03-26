@@ -24,6 +24,15 @@ namespace InventoryAPI
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Car Inventory API", Description = "Swagger documentation for an asp.net core web api." });
 
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCORS",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,8 +42,9 @@ namespace InventoryAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            
-           
+
+            //app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader());
+            app.UseCors("EnableCORS");
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>

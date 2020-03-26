@@ -60,6 +60,28 @@ namespace InventoryAPI.Services
             return _inventoryItems;
         }
 
+        public List<InventoryItems> GetSearchResult(SearchModel inquiry)
+        {
+            
+            List<InventoryItems> _searchresult = new List<InventoryItems>();
+            if (inquiry.Type.Equals("make"))
+            {
+                _searchresult = _inventoryItems
+                    .Where((x) => x.Make.ToLower().Contains(inquiry.Text.ToLower())).ToList();
+
+            }
+            else if (inquiry.Type.Equals("model"))
+            {
+                _searchresult = _inventoryItems
+                  .Where((x) => x.Model.ToLower().Contains(inquiry.Text.ToLower())).ToList();
+            }
+            else
+            {
+                _searchresult = null;
+            }
+            return _searchresult; 
+        }
+
         public string UpdateInventoryItem(InventoryItems updatedItem)
         {
             string result = "";
@@ -67,24 +89,13 @@ namespace InventoryAPI.Services
             if (itemExist)
             {
                 _inventoryItems = _inventoryItems
-                    .Where((x) => x.Id == updatedItem.Id)
-                    .Select(ex => new InventoryItems
-                    {
-                        Id     = ex.Id,
-                        Body   = updatedItem.Body,
-                        Color  = updatedItem.Color,
-                        Make   = updatedItem.Make,
-                        Model  = updatedItem.Model,
-                        Photos = updatedItem.Photos,
-                        Price  = updatedItem.Price,
-                        Year   = updatedItem.Year
-                    }).ToList();
+                    .Where((x) => x.Id != updatedItem.Id).ToList();
+                _inventoryItems.Add(updatedItem);
 
                 result = "Car with id:" + updatedItem.Id + " has been updated.";
             }
             else
             {
-                _inventoryItems.Add(updatedItem);
                 result = "There is no such car with id: "+ updatedItem.Id+ ".";
             }
 

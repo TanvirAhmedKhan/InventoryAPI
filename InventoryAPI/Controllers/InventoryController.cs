@@ -62,5 +62,13 @@ namespace InventoryAPI.Controllers
             var response = _services.UpdateInventoryItem(item);
             return response;
         }
+
+        [HttpPost]
+        [Route("SearchBy")]
+        public List<InventoryItems> SearchBy([FromBody]SearchModel inquiry)
+        {
+            var searchResult = _services.GetSearchResult(inquiry);
+            return searchResult;
+        }
     }
 }

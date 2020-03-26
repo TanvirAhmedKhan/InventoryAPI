@@ -13,5 +13,6 @@ namespace InventoryAPI.Services
         InventoryItems GetInventoryItemById(int id);
         string DeleteItemById(int id);
         string UpdateInventoryItem(InventoryItems item);
+        List<InventoryItems> GetSearchResult(SearchModel inquiry);
     }
 }
