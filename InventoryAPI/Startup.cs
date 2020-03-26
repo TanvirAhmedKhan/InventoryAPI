@@ -43,6 +43,9 @@ namespace InventoryAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             //app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader());
             app.UseCors("EnableCORS");
             app.UseMvc();

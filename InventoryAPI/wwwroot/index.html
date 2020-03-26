@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <p>To build and run API in docker</p>
+    <hr />
+    <code>docker build -t api .</code>
+    <br />
+    <code>docker run -it -p 57877:80 --name mycontainer api </code>
+
+    <br />
+    #########################################################
+
+
+    <p>To build and run React app</p>
+    <hr />
+    <code>
+        npm start
+    </code>
+    <br />
+    #########################################################
+    <br /><br /> <br />
+    <h4>
+        Note:
+    </h4>
+    <p>Please check your docker machine ip:</p>
+    <code>docker-machine ip</code>
+
+    <br /><br /> <br />
+    #########################################################
+
+    <p>
+        I am using docker toolbox in windows. So, my docker-machine ip is http://192.168.99.100.
+        So, from UI, If i want to hit the API, I need to use http://192.168.99.100:57877.
+    </p>
+    <p>
+        In the UI project, I have set the url as http://localhost:57877/
+        So, chances are high, if you are using docker in linux machine, it should work directly.
+    </p>
+
+    #########################################################
+
+    <p>
+        The api swagger doc will be available at http://localhost:57877/swagger
+        or if you are using docker toolbox in windows like me,
+        the url would be most probably- http://192.168.99.100:57877/swagger
+    </p>
+
+</body>
+</html>
